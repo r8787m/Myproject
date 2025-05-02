@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Multi-Step Prospect Form</title>
+
+<!--  Bootstrap 5  -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<!--  jQuery  -->
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+<style>
+  /* Tiny helper to hide steps */
+  .form-page{display:none}
+  .form-page.active{display:block}
+  .step-btns{margin-top:2rem}
+</style>
+</head>
+<body class="bg-light">
+
+<div class="container my-5">
+  <h1 class="mb-4">Prospect / Customer Wizard</h1>
+
+  <!-- =====================   FORM   ===================== -->
+  <form id="mainForm">
+
+    <!-- =====================   PAGE 1   ===================== -->
+    <div id="page1" class="form-page active">
+      <h4 class="mb-3">Page 1 – Primary Information</h4>
+
+      <div class="row g-3">
+
+        <!-- Entity ID (random) -->
+        <div class="col-sm-4">
+          <label class="form-label fw-bold">Entity&nbsp;ID <span class="text-danger">*</span></label>
+          <input type="number" id="entityId" name="Entity ID" class="form-control" readonly required>
+        </div>
+
+        <!-- Type -->
+        <fieldset class="col-sm-4">
+          <legend class="fs-6 fw-bold mb-1">Type <span class="text-danger">*</span></legend>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="Type" id="typeIndividual" value="Individual" required>
+            <label class="form-check-label" for="typeIndividual">Individual</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="Type" id="typeCompany" value="Company" required>
+            <label class="form-check-label" for="typeCompany">Company</label>
+          </div>
+        </fieldset>
+      </div>
+
+      <!-- ===== Fieldset Individual (conditional) ===== -->
+      <fieldset id="fsIndividual" class="border rounded p-3 my-3 bg-body-tertiary" style="display:none">
+        <legend class="float-none fs-6 w-auto px-2">Individual Info</legend>
+
+        <div class="row g-3">
+          <!-- Salutation -->
+          <div class="col-md-2">
+            <label class="form-label">Salutation</label>
+            <select name="Salutation" class="form-select">
+              <option value="">Choose…</option>
+              <option>Mr.</option><option>Mrs.</option><option>Ms.</option><option>Dr.</option>
+            </select>
+            <small class="text-muted">This field should be reviewed by a human.</small>
+          </div>
+
+          <div class="col-md-3">
+            <label class="form-label">First Name</label>
+            <input name="First Name" class="form-control">
+            <small class="text-muted">This field should be reviewed by a human.</small>
+          </div>
+
+          <div class="col-md-3">
+            <label class="form-label">Middle Name</label>
+            <input name="Middle Name" class="form-control">
+            <small class="text-muted">This field should be reviewed by a human.</small>
+          </div>
+
+          <div class="col-md-3">
+            <label class="form-label">Last Name</label>
+            <input name="Last Name" class="form-control">
+            <small class="text-muted">This field should be reviewed by a human.</small>
+          </div>
+
+          <div class="col-md-4">
+            <label class="form-label">Job Title</label>
+            <input name="Job Title (Individual)" class="form-control">
+            <small class="text-muted">This field should be reviewed by a human.</small>
+          </div>
+        </div>
+      </fieldset>
+
+      <!-- ===== Fieldset Company (always) ===== -->
+      <fieldset class="border rounded p-3 bg-body-tertiary">
+        <legend class="float-none fs-6 w-auto px-2">Company Info</legend>
+
+        <div class="row g-3">
+
+          <div class="col-md-4">
+            <label class="form-label">Company Name</label>
+            <input name="Company Name" class="form-control">
+            <small class="text-muted">This field should be reviewed by a human.</small>
+          </div>
+
+          <div class="col-md-4">
+            <label class="form-label">Parent Company</label>
+            <input name="Parent Company" class="form-control">
+          </div>
+
+          <div class="col-md-3">
+            <label class="form-label fw-bold">Status <span class="text-danger">*</span></label>
+            <select name="Status" class="form-select" required>
+              <option value="">Choose…</option><option>Closed</option><option>Won</option>
+            </select>
+          </div>
+
+          <div class="col-md-3">
+            <label class="form-label fw-bold">Territory <span class="text-danger">*</span></label>
+            <select name="Territory" class="form-select" required>
+              <option value="">Choose…</option><option>A</option><option>B</option><option>C</option>
+            </select>
+          </div>
+
+          <div class="col-md-3">
+            <label class="form-label fw-bold">Sales Rep <span class="text-danger">*</span></label>
+            <select name="Sales Rep" class="form-select" required>
+              <option value="">Choose…</option><option>Samer</option><option>Kym</option>
+            </select>
+          </div>
+
+          <div class="col-md-3">
+            <label class="form-label">Category</label>
+            <select name="Category" class="form-select">
+              <option value="">Choose…</option><option>A</option><option>B</option><option>C</option>
+            </select>
+            <small class="text-muted">This field should be reviewed by a human.</small>
+          </div>
+
+          <div class="col-md-3">
+            <label class="form-label">Sub Category</label>
+            <select name="Sub Category" class="form-select">
+              <option value="">Choose…</option><option>AA</option><option>BB</option><option>CC</option>
+            </select>
+            <small class="text-muted">This field should be reviewed by a human.</small>
+          </div>
+
+          <div class="col-12">
+            <label class="form-label">Comments</label>
+            <textarea name="Comments" class="form-control" rows="2"></textarea>
+            <small class="text-muted">This field should be reviewed by a human.</small>
+          </div>
+
+          <div class="col-md-4">
+            <label class="form-label">Receiving Schedule</label>
+            <input type="date" name="Receiving Schedule" class="form-control">
+            <small class="text-muted">This field should be reviewed by a human.</small>
+          </div>
+
+        </div>
+      </fieldset>
+
+      <div class="step-btns">
+        <button type="button" class="btn btn-primary float-end nextBtn">Next →</button>
+      </div>
+    </div><!-- /page1 -->
+
+    <!-- =====================   PAGE 2   ===================== -->
+    <div id="page2" class="form-page">
+      <h4 class="mb-3">Page 2 – Contact Information</h4>
+
+      <!-- ===== Information ===== -->
+      <fieldset class="border rounded p-3 bg-body-tertiary">
+        <legend class="float-none fs-6 w-auto px-2">Information</legend>
+        <div class="row g-3">
+
+          <div class="col-md-4">
+            <label class="form-label">Email</label>
+            <input type="email" name="Email" class="form-control">
+            <small class="text-muted">This field should be reviewed by a human.</small>
+          </div>
+
+          <div class="col-md-4">
+            <label class="form-label">Web address</label>
+            <input name="Web address" class="form-control">
+          </div>
+
+          <div class="col-md-4">
+            <label class="form-label fw-bold">Primary Phone <span class="text-danger">*</span></label>
+            <input name="Primary Phone" class="form-control" required>
+          </div>
+
+          <div class="col-md-4">
+            <label class="form-label">Alternative Phone</label>
+            <input name="Alternative Phone" class="form-control">
+          </div>
+
+        </div>
+      </fieldset>
+
+      <!-- ===== Address ===== -->
+      <fieldset class="border rounded p-3 bg-body-tertiary my-3">
+        <legend class="float-none fs-6 w-auto px-2">Address</legend>
+        <div class="row g-3">
+
+          <div class="col-md-3">
+            <label class="form-label">Label</label>
+            <select name="Address Label" class="form-select">
+              <option value="">Choose…</option><option>A</option><option>B</option><option>C</option>
+            </select>
+            <small class="text-muted">This field should be reviewed by a human.</small>
+          </div>
+
+          <div class="col-md-5">
+            <label class="form-label">Type</label><br>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="checkbox" name="Address Type" value="Billing">
+              <label class="form-check-label">Billing</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="checkbox" name="Address Type" value="Shipping">
+              <label class="form-check-label">Shipping</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="checkbox" name="Address Type" value="Residential">
+              <label class="form-check-label">Residential</label>
+            </div>
+            <small class="d-block text-muted">This field should be reviewed by a human.</small>
+          </div>
+
+          <div class="col-md-6">
+            <label class="form-label">Address</label>
+            <input name="Address" class="form-control">
+            <small class="text-muted">This field should be reviewed by a human.</small>
+          </div>
+        </div>
+      </fieldset>
+
+      <!-- ===== Contact Person (company only) ===== -->
+      <fieldset id="fsContactPerson" class="border rounded p-3 bg-body-tertiary" style="display:none">
+        <legend class="float-none fs-6 w-auto px-2">Contact Person</legend>
+        <div class="row g-3">
+
+          <div class="col-md-4">
+            <label class="form-label">Name</label>
+            <input name="Contact Person Name" class="form-control">
+          </div>
+
+          <div class="col-md-4">
+            <label class="form-label">Job Title</label>
+            <input name="Contact Person Job Title" class="form-control">
+          </div>
+
+          <div class="col-md-4">
+            <label class="form-label">Role</label>
+            <input name="Contact Person Role" class="form-control">
+          </div>
+
+          <div class="col-md-4">
+            <label class="form-label">Email</label>
+            <input type="email" name="Contact Person Email" class="form-control">
+          </div>
+
+          <div class="col-md-4">
+            <label class="form-label">Phone</label>
+            <input name="Contact Person Phone" class="form-control">
+          </div>
+
+        </div>
+      </fieldset>
+
+      <div class="step-btns clearfix">
+        <button type="button" class="btn btn-secondary prevBtn">← Back</button>
+        <button type="button" class="btn btn-primary float-end nextBtn">Next →</button>
+      </div>
+    </div><!-- /page2 -->
+
+    <!-- =====================   PAGE 3   ===================== -->
+    <div id="page3" class="form-page">
+      <h4 class="mb-3">Page 3 – Account Information</h4>
+
+      <!-- ===== Account ===== -->
+      <fieldset class="border rounded p-3 bg-body-tertiary">
+        <legend class="float-none fs-6 w-auto px-2">Account</legend>
+        <div class="row g-3">
+
+          <div class="col-md-4">
+            <label class="form-label">Primary Currency</label>
+            <select name="Primary Currency" class="form-select">
+              <option value="">Choose…</option><option>AED</option><option>USD</option><option>EURO</option><option>CAD</option><option>SAR</option>
+            </select>
+            <small class="text-muted">This field should be reviewed by a human.</small>
+          </div>
+
+          <div class="col-md-4">
+            <label class="form-label">Payment Methods</label>
+            <select name="Payment Methods" class="form-select">
+              <option value="">Choose…</option><option>A</option><option>B</option><option>C</option><option>Cheque</option>
+            </select>
+            <small class="text-muted">This field should be reviewed by a human.</small>
+          </div>
+        </div>
+      </fieldset>
+
+      <!-- ===== License (company only) ===== -->
+      <fieldset id="fsLicense" class="border rounded p-3 bg-body-tertiary my-3" style="display:none">
+        <legend class="float-none fs-6 w-auto px-2">License</legend>
+        <div class="row g-3">
+
+          <div class="col-md-4">
+            <label class="form-label">Trade License</label>
+            <input name="Trade License" class="form-control">
+            <small class="text-muted">This field should be reviewed by a human.</small>
+          </div>
+
+          <div class="col-md-4">
+            <label class="form-label">Establish Date</label>
+            <input type="date" name="Establish Date" class="form-control">
+            <small class="text-muted">This field should be reviewed by a human.</small>
+          </div>
+
+          <div class="col-md-4">
+            <label class="form-label">Trade License Expiry Date</label>
+            <input type="date" name="Trade License Expiry Date" class="form-control">
+            <small class="text-muted">This field should be reviewed by a human.</small>
+          </div>
+
+          <div class="col-md-4">
+            <label class="form-label">Tax Reg. Number</label>
+            <input name="Tax Reg. Number" class="form-control">
+            <small class="text-muted">This field should be reviewed by a human.</small>
+          </div>
+
+          <div class="col-md-4">
+            <label class="form-label">Legal Names</label>
+            <input name="Legal Names" class="form-control">
+            <small class="text-muted">This field should be reviewed by a human.</small>
+          </div>
+
+          <div class="col-md-4">
+            <label class="form-label">Account</label>
+            <input name="Account" class="form-control">
+            <small class="text-muted">This field should be reviewed by a human.</small>
+          </div>
+        </div>
+      </fieldset>
+
+      <!-- ===== Credit Control ===== -->
+      <fieldset class="border rounded p-3 bg-body-tertiary">
+        <legend class="float-none fs-6 w-auto px-2">Credit Control</legend>
+        <div class="row g-3">
+
+          <div class="col-md-3">
+            <label class="form-label">Terms</label>
+            <select name="Terms" class="form-select">
+              <option value="">Choose…</option><option>A</option><option>B</option><option>C</option><option>DOR</option>
+            </select>
+            <small class="text-muted">This field should be reviewed by a human.</small>
+          </div>
+
+          <div class="col-md-3">
+            <label class="form-label">Credit Limit</label>
+            <input name="Credit Limit" class="form-control">
+            <small class="text-muted">This field should be reviewed by a human.</small>
+          </div>
+
+          <div class="col-md-4">
+            <label class="form-label">Invoice Acknowledgement Level</label>
+            <select name="Invoice Acknowledgement Level" class="form-select">
+              <option value="">Choose…</option><option>Signature and Stamp</option><option>Signature</option>
+            </select>
+            <small class="text-muted">This field should be reviewed by a human.</small>
+          </div>
+
+          <!-- Credit Facility Agreement (company only) -->
+          <div id="creditFacilityWrap" class="col-md-4" style="display:none">
+            <label class="form-label d-block">Credit Facility Agreement</label>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="Credit Facility Agreement" value="Yes">
+              <label class="form-check-label">Yes</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="Credit Facility Agreement" value="No">
+              <label class="form-check-label">No</label>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <label class="form-label">Security Cheque Amount</label>
+            <input name="Security Cheque Amount" class="form-control">
+            <small class="text-muted">This field should be reviewed by a human.</small>
+          </div>
+        </div>
+      </fieldset>
+
+      <!-- ===== Preferences ===== -->
+      <fieldset class="border rounded p-3 bg-body-tertiary my-3">
+        <legend class="float-none fs-6 w-auto px-2">Preferences</legend>
+        <div class="row g-3">
+
+          <div class="col-md-4">
+            <label class="form-label d-block">Do not include in monthly</label>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="Do not include in monthly" value="Yes">
+              <label class="form-check-label">Yes</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="Do not include in monthly" value="No">
+              <label class="form-check-label">No</label>
+            </div>
+            <small class="d-block text-muted">This field should be reviewed by a human.</small>
+          </div>
+
+          <div class="col-md-4">
+            <label class="form-label d-block">Send Transactions Via</label>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="checkbox" name="Send Transactions Via" value="Email">
+              <label class="form-check-label">Email</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="checkbox" name="Send Transactions Via" value="Print">
+              <label class="form-check-label">Print</label>
+            </div>
+            <small class="d-block text-muted">This field should be reviewed by a human.</small>
+          </div>
+
+          <div class="col-md-4">
+            <label class="form-label d-block">Ship Complete</label>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="Ship Complete" value="Yes">
+              <label class="form-check-label">Yes</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="Ship Complete" value="No">
+              <label class="form-check-label">No</label>
+            </div>
+          </div>
+
+          <div class="col-md-3">
+            <label class="form-label">Shipping Carrier</label>
+            <select name="Shipping Carrier" class="form-select">
+              <option value="">Choose…</option><option>A</option><option>B</option><option>C</option>
+            </select>
+          </div>
+
+          <div class="col-md-3">
+            <label class="form-label">Shipping Method</label>
+            <select name="Shipping Method" class="form-select">
+              <option value="">Choose…</option><option>A</option><option>B</option><option>C</option>
+            </select>
+          </div>
+        </div>
+      </fieldset>
+
+      <div class="step-btns clearfix">
+        <button type="button" class="btn btn-secondary prevBtn">← Back</button>
+        <button type="submit" class="btn btn-success float-end">Submit</button>
+      </div>
+    </div><!-- /page3 -->
+  </form><!-- /mainForm -->
+
+  <!-- =====================   SUMMARY PAGE   ===================== -->
+  <div id="summary" style="display:none">
+    <h3 class="mt-4">Submission Summary</h3>
+    <div class="table-responsive">
+      <table id="summaryTable" class="table table-bordered table-striped align-middle"></table>
+    </div>
+
+    <div class="my-3">
+      <a id="csvBtn" class="btn btn-outline-primary me-2" download="submission.csv">Download CSV</a>
+      <a id="emailBtn" class="btn btn-outline-success">Send to info@company.com</a>
+    </div>
+  </div>
+
+</div><!-- /container -->
+
+<!-- =====================   SCRIPTS   ===================== -->
+<script>
+$(function(){
+
+  // -------- Random Entity ID on load --------
+  $('#entityId').val(Math.floor(Math.random()*900000) + 100000);
+
+  // -------- Move between pages --------
+  function showPage(n){
+    $('.form-page').removeClass('active').hide();
+    $('#page'+n).addClass('active').show();
+    window.scrollTo(0,0);
+  }
+
+  $('.nextBtn').on('click',function(){
+    // validate current page
+    const curPage=$(this).closest('.form-page');
+    const valid = [...curPage.find(':input[required]')].every(el=>el.checkValidity());
+    if(!valid){curPage.find(':input[required]').addClass('is-invalid'); return;}
+    showPage(curPage.index('.form-page')+2);
+  });
+
+  $('.prevBtn').on('click',function(){
+    const curPage=$(this).closest('.form-page');
+    showPage(curPage.index('.form-page'));
+  });
+
+  // -------- Conditional visibility based on Type --------
+  $('input[name="Type"]').on('change', function(){
+    const isIndividual = $(this).val()==='Individual';
+    $('#fsIndividual').toggle(isIndividual);
+    $('#fsContactPerson, #fsLicense, #creditFacilityWrap').toggle(!isIndividual);
+  });
+
+  // -------- Prevent native submission, build summary --------
+  $('#mainForm').on('submit',function(e){
+    e.preventDefault();
+
+    // collect form data
+    const dataArray = $(this).serializeArray();
+    const dataObj   = Object.fromEntries(dataArray.map(o=>[o.name, o.value]));
+    // remove empty keys for cleaner display
+    Object.keys(dataObj).forEach(k=>{ if(!dataObj[k]) delete dataObj[k]; });
+
+    // build table
+    const $tbl = $('#summaryTable').empty();
+    $tbl.append('<thead><tr><th>Field</th><th>Value</th></tr></thead>');
+    const $tbody=$('<tbody/>').appendTo($tbl);
+    $.each(dataObj, (k,v)=>{ $tbody.append(`<tr><td>${k}</td><td>${v}</td></tr>`); });
+
+    // build CSV
+    const csvLines = ['"Field","Value"'];
+    $.each(dataObj,(k,v)=>{ csvLines.push(`"${k.replace(/"/g,'\"')}","${v.replace(/"/g,'\"')}"`); });
+    const csvText = csvLines.join("\r\n");
+    $('#csvBtn').attr('href','data:text/csv;charset=utf-8,'+encodeURIComponent(csvText));
+
+    // build mailto (subject + body – the CSV)
+    const mailBody = encodeURIComponent(csvText);
+    $('#emailBtn').attr('href',`mailto:info@company.com?subject=New%20Prospect%20Submission&body=${mailBody}`);
+
+    // show summary page, hide form
+    $('#mainForm').hide();
+    $('#summary').show();
+    window.scrollTo(0,0);
+  });
+
+});
+</script>
+</body>
+</html>
